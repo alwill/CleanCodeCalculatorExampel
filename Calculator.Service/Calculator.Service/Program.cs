@@ -13,29 +13,34 @@ namespace Calculator.Service
                 Console.WriteLine("Enter equation for processing:");
 
                 var userInput = Console.ReadLine();
-
-                switch (userInput)
+                try
                 {
-                    case "help":
+                    switch (userInput)
                     {
-                        Console.WriteLine("We only do basic addition, " +
-                                          "multiplication, and division \n " +
-                                          "e.g. 5 + 2 \n Only 2 numbers and " +
-                                          "must be separated by a space.");
-                        break;
+                        case "help":
+                        {
+                            Console.WriteLine("We only do basic addition, " +
+                                              "multiplication, and division \n " +
+                                              "e.g. 5 + 2 \n Only 2 numbers and " +
+                                              "must be separated by a space.");
+                            break;
+                        }
+                        case "file":
+                        {
+                            Console.WriteLine("File path:");
+                            var filePath = Console.ReadLine();
+                            var equationResult = theObject.Proccess(filePath, true, null);
+                            Console.WriteLine(equationResult);
+                            break;
+                        }
+                        default:
+                            var result = theObject.Proccess(userInput, false, new object());
+                            Console.WriteLine(result);
+                            break;
                     }
-                    case "file":
-                    {
-                        Console.WriteLine("File path:");
-                        var filePath = Console.ReadLine();
-                        var equationResult = theObject.Proccess(filePath, true, null);
-                        Console.WriteLine(equationResult);
-                        break;
-                    }
-                    default:
-                        var result = theObject.Proccess(userInput, false, new object());
-                        Console.WriteLine(result);
-                        break;
+                }
+                catch (Exception)
+                {// Should never happen
                 }
             }
         }
