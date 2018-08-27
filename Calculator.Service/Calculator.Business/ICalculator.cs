@@ -2,6 +2,6 @@
 {
     public interface ICalculator
     {
-        float Proccess(string input, bool fromFile);
+        float Proccess(string sString, bool bFile, object theObject);
     }
 }

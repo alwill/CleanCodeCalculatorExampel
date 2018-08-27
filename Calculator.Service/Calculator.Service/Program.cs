@@ -28,12 +28,12 @@ namespace Calculator.Service
                     {
                         Console.WriteLine("File path:");
                         var filePath = Console.ReadLine();
-                        var equationResult = theObject.Proccess(filePath, true);
+                        var equationResult = theObject.Proccess(filePath, true, null);
                         Console.WriteLine(equationResult);
                         break;
                     }
                     default:
-                        var result = theObject.Proccess(userInput, false);
+                        var result = theObject.Proccess(userInput, false, new object());
                         Console.WriteLine(result);
                         break;
                 }
