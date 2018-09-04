@@ -7,7 +7,7 @@ namespace Calculator.Service
     {
         private static void Main(string[] args)
         {
-            ICalculator theObject = new Business.Calculator();
+            ICalculator calculator = new Business.Calculator();
             while (true)
             {
                 Console.WriteLine("Enter equation for processing:");
@@ -29,12 +29,12 @@ namespace Calculator.Service
                         {
                             Console.WriteLine("File path:");
                             var filePath = Console.ReadLine();
-                            var equationResult = theObject.Proccess(filePath, true, null);
+                            var equationResult = calculator.Process(filePath, true, null);
                             Console.WriteLine(equationResult);
                             break;
                         }
                         default:
-                            var result = theObject.Proccess(userInput, false, new object());
+                            var result = calculator.Process(userInput, false, new object());
                             Console.WriteLine(result);
                             break;
                     }

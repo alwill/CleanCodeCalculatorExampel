@@ -17,7 +17,7 @@ namespace Calculator.Business
         /// <param name="fileName"></param>
         /// <param name="theObject"></param>
         /// <returns></returns>
-        public float Proccess(string sString, bool bFile, object theObject)
+        public float Process(string sString, bool bFile, object theObject)
         {
             double num1, num2;
 
