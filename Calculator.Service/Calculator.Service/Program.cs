@@ -29,8 +29,7 @@ namespace Calculator.Service
                             break;
                         }
                         default:
-                            var result = CalculateEquation(userInput);
-                            Console.WriteLine(result);
+                            CalculateEquationFromUserInput(userInput);
                             break;
                     }
                 }
@@ -40,6 +39,12 @@ namespace Calculator.Service
                     Console.WriteLine(exception);
                 }
             }
+        }
+
+        private static void CalculateEquationFromUserInput(string userInput)
+        {
+            var result = CalculateEquation(userInput);
+            Console.WriteLine(result);
         }
 
         private static void CalculateEquationFromFile()
