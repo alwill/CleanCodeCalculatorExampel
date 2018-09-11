@@ -20,18 +20,12 @@ namespace Calculator.Service
                     {
                         case "help":
                         {
-                            Console.WriteLine("We only do basic addition, " +
-                                              "multiplication, and division \n " +
-                                              "e.g. 5 + 2 \n Only 2 numbers and " +
-                                              "must be separated by a space.");
+                            DisplayHelpMessage();
                             break;
                         }
                         case "file":
                         {
-                            Console.WriteLine("File path:");
-                            var filePath = Console.ReadLine();
-                            var equationResult = CalculateEquationFromFile(filePath);
-                            Console.WriteLine(equationResult);
+                            CalculateEquationFromFile();
                             break;
                         }
                         default:
@@ -48,10 +42,35 @@ namespace Calculator.Service
             }
         }
 
-        private static float CalculateEquationFromFile(string filePath)
+        private static void CalculateEquationFromFile()
+        {
+            DisplayFileMessage();
+            var filePath = GetFileInput();
+            var equation = ReadEquationFromFile(filePath);
+            var result = CalculateEquation(equation);
+            Console.WriteLine(result);
+        }
+        private static void DisplayFileMessage()
+        {
+            Console.WriteLine("File path:");
+        }
+
+        private static string GetFileInput()
+        {
+            return Console.ReadLine();
+        }
+
+        private static string ReadEquationFromFile(string filePath)
         {
             var equation = File.ReadAllText(filePath);
-            return CalculateEquation(equation);
+            return equation;
+        }
+        private static void DisplayHelpMessage()
+        {
+            Console.WriteLine("We only do basic addition, " +
+                              "multiplication, and division \n " +
+                              "e.g. 5 + 2 \n Only 2 numbers and " +
+                              "must be separated by a space.");
         }
 
         private static float CalculateEquation(string equation)
