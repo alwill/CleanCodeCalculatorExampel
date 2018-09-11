@@ -1,13 +1,14 @@
 ﻿using System;
+using System.IO;
 using Calculator.Business;
 
 namespace Calculator.Service
 {
     internal class Program
     {
+        private static readonly ICalculator Calculator = new Business.Calculator();
         private static void Main(string[] args)
         {
-            ICalculator calculator = new Business.Calculator();
             while (true)
             {
                 Console.WriteLine("Enter equation for processing:");
@@ -29,12 +30,12 @@ namespace Calculator.Service
                         {
                             Console.WriteLine("File path:");
                             var filePath = Console.ReadLine();
-                            var equationResult = calculator.Process(filePath, true, null);
+                            var equationResult = CalculateEquationFromFile(filePath);
                             Console.WriteLine(equationResult);
                             break;
                         }
                         default:
-                            var result = calculator.Process(userInput, false, new object());
+                            var result = CalculateEquation(userInput);
                             Console.WriteLine(result);
                             break;
                     }
@@ -43,6 +44,17 @@ namespace Calculator.Service
                 {// Should never happen
                 }
             }
+        }
+
+        private static float CalculateEquationFromFile(string filePath)
+        {
+            var equation = File.ReadAllText(filePath);
+            return CalculateEquation(equation);
+        }
+
+        private static float CalculateEquation(string equation)
+        {
+            return Calculator.Process(equation);
         }
     }
 }

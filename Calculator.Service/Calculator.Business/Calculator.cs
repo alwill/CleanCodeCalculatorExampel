@@ -1,6 +1,4 @@
-﻿using System;
-using System.IO;
-// using System.Collections.Generic;
+﻿// using System.Collections.Generic;
 
 namespace Calculator.Business
 {
@@ -9,7 +7,7 @@ namespace Calculator.Business
     /// </summary>
     public class Calculator : ICalculator
     {
-        public decimal dResult = -1;
+        public decimal Result = -1;
 
         /// <summary>
         /// Process input
@@ -17,106 +15,56 @@ namespace Calculator.Business
         /// <param name="fileName"></param>
         /// <param name="theObject"></param>
         /// <returns></returns>
-        public float Process(string sString, bool bFile, object theObject)
+        public float Process(string equation)
         {
             double num1, num2;
-
-            if (bFile)
+            var equationSplit = equation.Split(' ');
+            num1 = float.Parse(equationSplit[0]); num2 = float.Parse(equationSplit[2]);
+            switch (equationSplit[1])
             {
-                var equationString = File.ReadAllText(sString);
-                var equationSplit = equationString.Split(' ');
-                num1 = float.Parse(equationSplit[0]); num2 = float.Parse(equationSplit[2]);
-                switch (equationSplit[1])
+                case "+":
                 {
-                    case "+":
-                    {
-                        //dResult = num1 + num2;
-                        this.dResult = (decimal)Calculate((float)num1, (float)num2, "Add");
-                        break;
-                    }
-                    case "-":
-                    {
-                        this.dResult = (decimal)Calculate((float)num1, (float)num2, "SUB");
-                        break;
-                    }
-                    case "/":
-                    {
-                        this.dResult = (decimal)Calculate((float)num1, (float)num2, "div");
-                        break;
-                    }
-                    case "*":
-                    {
-                        this.dResult = (decimal)Calculate((float)num1, (float)num2, "make numbers cross sticks");
-                        break;
-                    }
+                    this.Result = (decimal)Add((float)num1, (float)num2);
+                    break;
                 }
-
-                return (float)this.dResult;
-            }
-            else
-            {
-                var equationSplit = sString.Split(' ');
-                num1 = float.Parse(equationSplit[0]); num2 = float.Parse(equationSplit[2]);
-                switch (equationSplit[1])
+                case "-":
                 {
-                    case "+":
-                    {
-                        this.dResult = (decimal)Calculate((float)num1, (float)num2, "Add");
-                        break;
-                    }
-                    case "-":
-                    {
-                        this.dResult = (decimal)Calculate((float)num1, (float)num2, "SUB");
-                        break;
-                    }
-                    case "/":
-                    {
-                        this.dResult = (decimal)Calculate((float)num1, (float)num2, "div");
-                        break;
-                    }
-                    case "*":
-                    {
-                        this.dResult = (decimal)Calculate((float)num1, (float)num2, "make numbers cross sticks");
-                        break;
-                    }
+                    this.Result = (decimal)Subtract((float)num1, (float)num2);
+                    break;
                 }
-
-                return (float)this.dResult;
+                case "/":
+                {
+                    this.Result = (decimal)Divide((float)num1, (float)num2);
+                    break;
+                }
+                case "*":
+                {
+                    this.Result = (decimal)Multiply((float)num1, (float)num2);
+                    break;
+                }
             }
 
-            return 0;
+            return (float)this.Result;
         }
-        private float Calculate(/* num 1 */float num1, float num2, string op /*, out int r */)
+
+        private float Multiply(float num1, float num2)
         {
-            string math = op;
-            // switch on op
-            switch (math)
-            {
-                case "Add":
-                {
-                    // add num1 and num2
-                    return num1 + num2;
-                }
-                // end case add
-                case "SUB":
-                {
-                    return num1 - num2;
-                }
-                // end case SUB
-                case "div":
-                {
-                    return num1 / num2;
-                }
-                // end case div
-                case "make numbers cross sticks":
-                {
-                    return num1 * num2;
-                }
-                // end case div
-                default:
-                    // throw exception
-                    throw new Exception();
-            }
+            return num1 * num2;
+        }
+
+        private float Divide(float num1, float num2)
+        {
+            return num1 / num2;
+        }
+
+        private float Add(float num1, float num2)
+        {
+            return num1 + num2;
+        }
+
+        private float Subtract(float num1, float num2)
+        {
+            return num1 - num2;
         }
     }
 }
