@@ -40,8 +40,10 @@ namespace Calculator.Service
                             break;
                     }
                 }
-                catch (Exception)
-                {// Should never happen
+                catch (Exception exception)
+                {
+                    // TODO log this. See issue #1
+                    Console.WriteLine(exception);
                 }
             }
         }
@@ -54,7 +56,7 @@ namespace Calculator.Service
 
         private static float CalculateEquation(string equation)
         {
-            return Calculator.Process(equation);
+            return Calculator.CalculateEquation(equation);
         }
     }
 }

@@ -2,6 +2,6 @@
 {
     public interface ICalculator
     {
-        float Process(string equation);
+        float CalculateEquation(string equation);
     }
 }
